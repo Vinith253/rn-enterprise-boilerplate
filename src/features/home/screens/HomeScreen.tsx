@@ -1,41 +1,45 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
 } from 'react-native';
 
-import Screen from '@shared/components/Screen/Screen';
-import Button from '@shared/components/Button/Button';
+import {
+  Button,
+  Screen,
+  Typography,
+  AppHeader,
+} from '@shared/components';
 
+import {spacing} from '@theme/spacing';
 import {useAppStore} from '@app/store/useAppStore';
-import {useAppTheme} from '@theme/useAppTheme';
 
 const HomeScreen = () => {
   const toggleTheme =
     useAppStore(
       state => state.toggleTheme,
     );
-  const theme = useAppTheme();
 
   return (
-    <Screen>
-      <View style={styles.container}>
-        <Text
-          style={[
-            styles.title,
-            {color: theme.colors.text},
-          ]}>
+  <Screen>
+    <View style={styles.container}>
+      <AppHeader title="Home" />
+
+      <View style={styles.content}>
+        <Typography
+          variant="headingMedium"
+          style={styles.title}>
           RN Enterprise Boilerplate 🚀
-        </Text>
+        </Typography>
 
         <Button
           title="Toggle Theme"
           onPress={toggleTheme}
         />
       </View>
-    </Screen>
-  );
+    </View>
+  </Screen>
+);
 };
 
 export default HomeScreen;
@@ -43,14 +47,16 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 24,
+    padding: spacing.md,
+    paddingTop: spacing.xl,
+  },
+
+  content: {
+    marginTop: spacing.xl,
   },
 
   title: {
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: 24,
+    marginBottom: spacing.lg,
     textAlign: 'center',
   },
 });
