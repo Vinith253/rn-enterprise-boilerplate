@@ -1,45 +1,44 @@
-import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import {
-  Button,
-  Screen,
-  Typography,
-  AppHeader,
-} from '@shared/components';
+import { Button, Screen, Typography, AppHeader } from '@shared/components';
 
-import {spacing} from '@theme/spacing';
-import {useAppStore} from '@app/store/useAppStore';
+import { spacing } from '@theme/spacing';
+import { useAppStore } from '@app/store/useAppStore';
+import { getUsers } from '../services/home.service';
 
 const HomeScreen = () => {
-  const toggleTheme =
-    useAppStore(
-      state => state.toggleTheme,
-    );
+  const toggleTheme = useAppStore(state => state.toggleTheme);
+
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        const response = await getUsers();
+
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadUsers();
+  }, []);
 
   return (
-  <Screen>
-    <View style={styles.container}>
-      <AppHeader title="Home" />
+    <Screen>
+      <View style={styles.container}>
+        <AppHeader title="Home" />
 
-      <View style={styles.content}>
-        <Typography
-          variant="headingMedium"
-          style={styles.title}>
-          RN Enterprise Boilerplate 🚀
-        </Typography>
+        <View style={styles.content}>
+          <Typography variant="headingMedium" style={styles.title}>
+            RN Enterprise Boilerplate 🚀
+          </Typography>
 
-        <Button
-          title="Toggle Theme"
-          onPress={toggleTheme}
-        />
+          <Button title="Toggle Theme" onPress={toggleTheme} />
+        </View>
       </View>
-    </View>
-  </Screen>
-);
+    </Screen>
+  );
 };
 
 export default HomeScreen;
