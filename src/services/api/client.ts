@@ -1,8 +1,10 @@
 import axios from 'axios';
-import Config from 'react-native-config';
+
+const API_URL =
+  'https://dummyjson.com';
 
 export const apiClient = axios.create({
-  baseURL: Config.API_URL,
+  baseURL: API_URL,
   timeout: 30000,
 
   headers: {

@@ -12,12 +12,13 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const loadUsers = async () => {
+      console.log("---------------")
       try {
         const response = await getUsers();
 
-        console.log(response);
+        console.log('USERS RESPONSE', response);
       } catch (error) {
-        console.log(error);
+        console.log('API ERROR', error);
       }
     };
 
