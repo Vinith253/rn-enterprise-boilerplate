@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '@services/api/interceptor';
+
 import AppProviders from '@app/providers/AppProviders';
 
 const App = () => {
